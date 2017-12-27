@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="../css/lib/layui.css?v=af171ba6ef">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--主体框架-->
+    <!--#include virtual="../includes/frame.html" -->
+
+    <!--内容部分-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">项目数据库</div>
+    </div>
+
+    <!--页脚-->
+    <!--#include virtual="../includes/footer.html" -->
+</div>
+<script src="../js/lib/layui.min.js?v=41c099634e"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>
