@@ -1,3 +1,8 @@
 {
-  "lib/layui.css": "lib/layui.css?v=af171ba6ef"
+  "common/common.css": "common/common.css?v=0fa637dd2d",
+  "insti/insti.css": "insti/insti.css?v=d41d8cd98f",
+  "lib/layui.css": "lib/layui.css?v=af171ba6ef",
+  "project/project.css": "project/project.css?v=d41d8cd98f",
+  "school/school.css": "school/school.css?v=d41d8cd98f",
+  "talent/talent.css": "talent/talent.css?v=d41d8cd98f"
 }

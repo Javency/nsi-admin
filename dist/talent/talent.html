@@ -1,32 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../css/lib/layui.css?v=af171ba6ef">
+    <title>NSI后台管理系统</title>
+    <link rel="stylesheet" href="../../layui/dist/css/layui.css">
+    <link rel="stylesheet" href="../css/common/common.css?v=0fa637dd2d">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_526904_tg6hbyrfygxbhuxr.css">
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <!--主体框架-->
-    <!--#include virtual="../includes/frame.html" -->
-
-    <!--内容部分-->
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">人才数据库</div>
-    </div>
-
-    <!--页脚-->
-    <!--#include virtual="../includes/footer.html" -->
+<!-- 弹出层 -->
+<div id="layer_inster" style="display:none">
+    <form action="" class="layui-form layui-form-pane" style="padding:10px;">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">杜甫</h2>
+                <div class="layui-colla-content layui-show">内容区域</div>
+            </div>
+        </div>
+    </form>
 </div>
-<script src="../js/lib/layui.min.js?v=41c099634e"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
 
-    });
-</script>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <!--主体框架-->
+        <!--#include virtual="../includes/frame.html" -->
+
+        <!--内容部分-->
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div class="layui-container content">
+                <form class="layui-form layui-form-pane">
+                    <!-- 功能栏 -->
+                    <div class="layui-form-item">
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <label class="layui-form-label" for="keyWord">人才查询</label>
+                                <div class="layui-input-inline">
+                                    <input id="keyWord" type="text" name="username" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-input keyWord">
+                                </div>
+                                <input type="button" name="" value="查询" class="layui-btn layui-btn-primary search" id="serch">
+                                <input type="button" name="" value="刷新" class="layui-btn layui-btn-normal refresh" id="refresh">
+                            </div>
+                            <!-- 按钮组 -->
+                            <div class="layui-col-md4 layui-col-md-offset3">
+                                <div class="layui-btn-group btns">
+                                    <button type="button" class="layui-btn" id="insertTalent"><i class="layui-icon">&#xe61f;</i>添加人才</button>
+                                    <button type="button" class="layui-btn layui-btn-warm" id="editSchool"><i class="layui-icon">&#xe642;</i>编辑人才</button>
+                                    <button type="button" class="layui-btn layui-btn-danger" id="deleteSchool"><i class="layui-icon">&#xe640;</i>批量删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 列表栏END -->
+                    <table id="schoolList" lay-filter="test"></table>
+                </form>
+            </div>
+        </div>
+
+        <!--页脚-->
+        <!--#include virtual="../includes/footer.html" -->
+    </div>
+    <script src="../../layui/dist/layui.js"></script>
+    <script src="../js/talent/talent.min.js?v=1997076b94"></script>
 </body>
+
 </html>

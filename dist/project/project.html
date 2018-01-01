@@ -1,32 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../css/lib/layui.css?v=af171ba6ef">
+    <title>NSI后台管理系统</title>
+    <link rel="stylesheet" href="../../layui/dist/css/layui.css">
+    <link rel="stylesheet" href="../css/common/common.css?v=0fa637dd2d">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_526904_tg6hbyrfygxbhuxr.css">
 </head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <!--主体框架-->
-    <!--#include virtual="../includes/frame.html" -->
-
-    <!--内容部分-->
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div style="padding: 15px;">项目数据库</div>
-    </div>
-
-    <!--页脚-->
-    <!--#include virtual="../includes/footer.html" -->
+<!-- 弹出层 -->
+<div id="layer_inster" style="display:none">
+    <form action="" class="layui-form layui-form-pane" style="padding:10px;">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">项目信息</h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="项目名称">项目名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="selProvince" class="layui-form-label">所在地区</label>
+                        <div class="layui-input-inline">
+                            <select name="quiz" id="selProvince" onchange="provinceChange('selProvince', 'selCity');" lay-search="required">
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="city" id="selCity" lay-search="required"> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">详细地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布单位</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入发布单位" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目标签</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入项目标签，注意：以英文分号结尾" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布单位</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入发布单位" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系人</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入联系人" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">项目简介</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="控制在50字以内" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">详细信息</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入详细信息" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">项目要求</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入项目要求" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<script src="../js/lib/layui.min.js?v=41c099634e"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
 
-    });
-</script>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <!--主体框架-->
+        <!--#include virtual="../includes/frame.html" -->
+
+        <!--内容部分-->
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div class="layui-container content">
+                <form class="layui-form layui-form-pane">
+                    <!-- 功能栏 -->
+                    <div class="layui-form-item">
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <label class="layui-form-label" for="keyWord">项目查询</label>
+                                <div class="layui-input-inline">
+                                    <input id="keyWord" type="text" name="username" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-input keyWord">
+                                </div>
+                                <input type="button" name="" value="查询" class="layui-btn layui-btn-primary search" id="serch">
+                                <input type="button" name="" value="刷新" class="layui-btn layui-btn-normal refresh" id="refresh">
+                            </div>
+                            <!-- 按钮组 -->
+                            <div class="layui-col-md4 layui-col-md-offset3">
+                                <div class="layui-btn-group btns">
+                                    <button type="button" class="layui-btn" id="insertProject"><i class="layui-icon">&#xe61f;</i>添加项目</button>
+                                    <button type="button" class="layui-btn layui-btn-warm" id="editSchool"><i class="layui-icon">&#xe642;</i>编辑项目</button>
+                                    <button type="button" class="layui-btn layui-btn-danger" id="deleteSchool"><i class="layui-icon">&#xe640;</i>批量删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 列表栏END -->
+                    <table id="schoolList" lay-filter="test"></table>
+                </form>
+            </div>
+        </div>
+
+        <!--页脚-->
+        <!--#include virtual="../includes/footer.html" -->
+    </div>
+    <script src="../../layui/dist/layui.js"></script>
+    <script src="../js/common/selectPlace.min.js"></script>
+    <script src="../js/project/project.min.js"></script>
 </body>
+
 </html>

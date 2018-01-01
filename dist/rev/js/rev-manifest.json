@@ -1,3 +1,8 @@
 {
-  "lib/layui.min.js": "lib/layui.min.js?v=41c099634e"
+  "common/selectPlace.min.js": "common/selectPlace.min.js?v=da87b03143",
+  "insti/insti.min.js": "insti/insti.min.js?v=3abcc792ba",
+  "lib/layui.min.js": "lib/layui.min.js?v=41c099634e",
+  "project/project.min.js": "project/project.min.js?v=a54955680a",
+  "school/school.min.js": "school/school.min.js?v=6f9468964e",
+  "talent/talent.min.js": "talent/talent.min.js?v=04dba2a72b"
 }

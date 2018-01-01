@@ -1,12 +1,340 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../css/lib/layui.css?v=af171ba6ef">
+    <title>NSI后台管理系统</title>
+    <link rel="stylesheet" href="../../layui/dist/css/layui.css">
+    <link rel="stylesheet" href="../css/common/common.css?v=0fa637dd2d">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_526904_tg6hbyrfygxbhuxr.css">
+    <!-- <link rel="stylesheet" href="../css/school/school.css?v=d41d8cd98f"> -->
 </head>
+<!-- 弹出层 -->
+<div id="layer_inster" style="display:none">
+    <form class="layui-form layui-form-pane" style="padding:10px;">
+        <!-- 基本信息 -->
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基本信息</h2>
+                <div class="layui-colla-content layui-show">
+                    <!-- 内容区 -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="schoolName">学校名</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="schoolName" name="title" required="" lay-verify="required" placeholder="请输入学校名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="englishName">英文名</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="englishName" name="title" required="" lay-verify="required" placeholder="请输入英文名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学校性质</label>
+                        <div class="layui-input-block">
+                            <select name="city" lay-verify="required">
+                                            <option value=""></option>
+                                            <option value="0">公办</option>
+                                            <option value="1">民办</option>
+                                            <option value="2">外籍</option>
+                                            <option value="3">其他</option>
+                                          </select>
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title"><input type="text" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>
+                                <dl class="layui-anim layui-anim-upbit" style="">
+                                    <dd lay-value="" class="layui-select-tips">请选择</dd>
+                                    <dd lay-value="0" class="">公办</dd>
+                                    <dd lay-value="1" class="">民办</dd>
+                                    <dd lay-value="2" class="">外籍</dd>
+                                    <dd lay-value="3" class="">其他</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="selProvince" class="layui-form-label">所在地区</label>
+                        <div class="layui-input-inline">
+                            <select name="quiz" id="selProvince" onchange="provinceChange('selProvince', 'selCity');" lay-search="required">
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="city" id="selCity" lay-search="required"> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">详细地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">建校时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入建校时间" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">运营状态</label>
+                        <div class="layui-input-block">
+                            <select name="city" lay-verify="required">
+                                        <option value=""></option>
+                                        <option value="0">运营中</option>
+                                        <option value="1">停办</option>
+                                        <option value="2">筹建</option>
+                                      </select>
+                            <div class="layui-unselect layui-form-select">
+                                <div class="layui-select-title"><input type="text" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div>
+                                <dl class="layui-anim layui-anim-upbit" style="">
+                                    <dd lay-value="" class="layui-select-tips">运营状态</dd>
+                                    <dd lay-value="0" class="">运营中</dd>
+                                    <dd lay-value="1" class="">停办</dd>
+                                    <dd lay-value="2" class="">筹建</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="schoolName">学制</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="eductionalSystem" name="title" required="" lay-verify="required" placeholder="请输入学制，以分号结尾" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" for="schoolName">学费</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="tuition" name="title" required="" lay-verify="required" placeholder="请输入学费" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">官网</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入官网" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 基本信息end -->
+
+        <!-- 课程信息 -->
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">课程信息</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">认证时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入国际课程认证时间" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">国际课程</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入国际课程，以分号结尾" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">认证&组织</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入认证&组织，以分号结尾" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">考试与评估</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入参加外部考试与评估，以分号结尾" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 课程信息END -->
+
+        <!-- 学生信息 -->
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">学生信息</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-collapse" style="margin-bottom:15px;">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">年段学生数（国际部）</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">幼儿园</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required="" lay-verify="required" placeholder="请输入幼儿园学生数" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">小学</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required="" lay-verify="required" placeholder="请输入小学学生数" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">初中</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required="" lay-verify="required" placeholder="请输入初中学生数" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">高中</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" required="" lay-verify="required" placeholder="请输入高中学生数" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="在校生总人数（国际部）">在校生总人数（国际部）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入在校生总人数" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="总容量（国际部）">总容量（国际部）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入总容量（国际部）" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="毕业班人数（国际部）">毕业班人数（国际部）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入毕业班人数（国际部）" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="学生主要国籍">学生主要国籍</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入学生主要国籍" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="生均年投入">生均年投入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入生均年投入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="俱乐部数量">俱乐部数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入俱乐部数量" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 学生信息END -->
+
+        <!-- 师资力量 -->
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">师资力量</h2>
+                <div class="layui-colla-content ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="校长/国际部主任国籍">校长/国际部主任国籍</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入校长/国际部主任国籍" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="总员工数量">总员工数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入总员工数量" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="总教师数量">总教师数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入总教师数量" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="外籍教师数量">外籍教师数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入外籍教师数量" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="师均年培训投入">师均年培训投入</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入师均年培训投入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="教师流失率">教师流失率</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入教师流失率" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="教师薪酬（三年经验）">教师薪酬（三年经验）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入教师薪酬（三年经验）" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="师生比">师生比</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入师生比" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 基建&投资END -->
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基建&投资</h2>
+                <div class="layui-colla-content ">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="占地面积（亩）">占地面积（亩）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入占地面积（亩）" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" title="建筑面积（平方米）">建筑面积（平方米）</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required="" lay-verify="required" placeholder="请输入建筑面积（平方米）" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">硬件设施</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入硬件设施" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">投资信息</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入投资信息" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入备注" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 基建&投资END -->
+    </form>
+    <!-- <button class="layui-btn" id="sub"><i class="layui-icon" style="margin-right:5px">&#xe62f;</i>提交</button> -->
+</div>
+
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
         <!--主体框架-->
@@ -15,19 +343,41 @@
         <!--内容部分-->
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <div style="padding: 15px;">学校数据库</div>
+            <div class="layui-container content">
+                <form class="layui-form layui-form-pane">
+                    <!-- 功能栏 -->
+                    <div class="layui-form-item">
+                        <div class="layui-row">
+                            <div class="layui-col-md5">
+                                <label class="layui-form-label" for="keyWord">学校查询</label>
+                                <div class="layui-input-inline">
+                                    <input id="keyWord" type="text" name="username" lay-verify="required" placeholder="请输入关键字" autocomplete="off" class="layui-input keyWord">
+                                </div>
+                                <input type="button" name="" value="查询" class="layui-btn layui-btn-primary search" id="serch">
+                                <input type="button" name="" value="刷新" class="layui-btn layui-btn-normal refresh" id="refresh">
+                            </div>
+                            <!-- 按钮组 -->
+                            <div class="layui-col-md4 layui-col-md-offset3">
+                                <div class="layui-btn-group btns">
+                                    <button type="button" class="layui-btn" id="insertSchool"><i class="layui-icon">&#xe61f;</i>添加学校</button>
+                                    <button type="button" class="layui-btn layui-btn-warm" id="editSchool"><i class="layui-icon">&#xe642;</i>编辑学校</button>
+                                    <button type="button" class="layui-btn layui-btn-danger" id="deleteSchool"><i class="layui-icon">&#xe640;</i>批量删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 列表栏END -->
+                    <table id="schoolList" lay-filter="test"></table>
+                </form>
+            </div>
         </div>
 
         <!--页脚-->
         <!--#include virtual="../includes/footer.html" -->
     </div>
-<script src="../js/lib/layui.min.js?v=41c099634e"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-
-    });
-</script>
+    <script src="../../layui/dist/layui.js"></script>
+    <script src="../js/common/selectPlace.min.js?v=da87b03143"></script>
+    <script src="../js/school/school.min.js?v=8a8d331f03"></script>
 </body>
+
 </html>
